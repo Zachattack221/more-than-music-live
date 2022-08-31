@@ -3,7 +3,7 @@
 var search = 'coldplay'
 var apiKey= 'Elez3rrH7G5nh44GoCJVBGcWaSKZnwYX'
 var requestUrl = `https:api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&sort=newest&api-key=${apiKey}`
-
+var newsEl= document.querySelector('#news');
 fetch(requestUrl)
     .then(function (response) {
       return response.json();
@@ -12,6 +12,10 @@ fetch(requestUrl)
       console.log(data);
       var betterData = data.response.docs
       for(let i = 0; i < 5; i++){
+        //<h2>Title</h2>
+          //  <img src="https://via.placeholder.com/200" alt="image" />
+            //<p class="text-center">Hello Here I am</p>
+            // <p>Date: 2022-09-01</p>
         var formattedDate = betterData[i].pub_date.split("T")
         console.log(formattedDate)
         var article = document.createElement('div')
@@ -28,7 +32,7 @@ fetch(requestUrl)
         snippet.textContent= (betterData[i].snippet)
         article.appendChild(snippet)
 
-        document.body.appendChild(article)
+        newsEl.appendChild(article)
       }
     });
 
