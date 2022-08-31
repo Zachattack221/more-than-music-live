@@ -10,35 +10,63 @@
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
 </head>
 
-<header class="bg-warning">More Than Music
-  <nav class="navbar navbar-light bg-light">
+<header class="bg-info fs-4 p-2">More Than Music
+  <nav class="navbar bg-info">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Link Link Link</a>
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        </ul>
+      <a class="navbar-brand"></a>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-warning" type="submit">Search</button>
+      </form>
     </div>
   </nav>
 </header>
 
 <body>
   <div class= "container">
-  <div class="row mt-3 m-2 p-3">
+  <div class="row mt-3 m-2 text-center p-2">
     <section class="col-4">
+      <div>
       <!-- <div id="artist-thumbnail">image</div> -->
+      <h4>Artist Name</h4>
       <img src="https://via.placeholder.com/200" alt="image" />
-      <h2>Artist Name</h2>
-      <div class="m-4" id="bio-genre">
-        <h2>Bio</h2>
+    </div>
+
+      <div class="mt-4 border border-info" id="bio-genre">
+        <h2 class="text-center">Bio</h2>
         <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, cumque ducimus fugiat
           consequatur atque quam amet quia, nesciunt obcaecati magnam voluptate optio hic minima reprehenderit at nobis
           ipsa ab nisi!</p>
       </div>
     </section>
+
     <section class="col-8">
-      <div class="m-4" id="news">
+      <div class="m-4 border border-info text-center p-2" id="news">
         <p>Date: 2022-09-01</p>
         <h2>News</h2>
-        <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, cumque ducimus fugiat
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, cumque ducimus fugiat
           consequatur atque quam amet quia, nesciunt obcaecati magnam voluptate optio hic minima reprehenderit at nobis
           ipsa ab nisi!</p>
+
+        <p>Date: 2022-09-01</p>
+        <h2>News</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, cumque ducimus fugiat
+          consequatur atque quam amet quia, nesciunt obcaecati magnam voluptate optio hic minima reprehenderit at nobis
+          ipsa ab nisi!</p>
+
+          <p>Date: 2022-09-01</p>
+          <h2>News</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, cumque ducimus fugiat
+            consequatur atque quam amet quia, nesciunt obcaecati magnam voluptate optio hic minima reprehenderit at nobis
+            ipsa ab nisi!</p>
       </div>
     </section>
   </div>
