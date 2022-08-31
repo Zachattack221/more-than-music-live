@@ -33,11 +33,8 @@ fetch(requestUrl)
     });
 
     //Getting data from Audio DB
-   
-    //var musicUrl = `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${artistName}`
-
-    var musicUrl = `https://www.theaudiodb.com/api/v1/json/2/search.php?s=coldplay`
-    var artistName = 'coldplay'
+    var artistName = 'outkast'
+    var musicUrl = `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${artistName}`
     var apiKey2 = '2'
 
     fetch(musicUrl)
@@ -46,5 +43,24 @@ fetch(requestUrl)
     })
     .then(function (data) {
       console.log(data);
+      var thumb = data.artists[0].strArtistThumb;
+      var artist = data.artists[0].strArtist;
+      var genre = data.artists[0].strGenre;
+      var bio = data.artists[0].strBiographyEN;
+      var topRadio = data.artists[0].strLastFMChart;
+      
+      thumb = document.createElement('figure');
+      artist = document.createElement('fig caption');
+      genre = document.createElement('p');
+      bio = document.createElement('p');
+      topRadio = document.createElement('a');
+
+      
+
+
+      
+      console.log(topRadio);
     })
+   
+   
    
