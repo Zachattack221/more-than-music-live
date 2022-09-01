@@ -5,6 +5,7 @@ var apiKey= 'Elez3rrH7G5nh44GoCJVBGcWaSKZnwYX'
 var requestUrl = `https:api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&sort=newest&api-key=${apiKey}`
 var newsEl= document.querySelector('#news');
 var artistThumbEl= document.querySelector('#artist-thumbnail');
+var bioGenreEl = document.querySelector('#bio-genre');
 
 fetch(requestUrl)
     .then(function (response) {
@@ -13,7 +14,7 @@ fetch(requestUrl)
     .then(function (data) {
       console.log(data);
       var betterData = data.response.docs
-      for(let i = 0; i < 5; i++){
+      for(let i = 0; i < 4; i++){
         //<h2>Title</h2>
           //  <img src="https://via.placeholder.com/200" alt="image" />
             //<p class="text-center">Hello Here I am</p>
@@ -57,30 +58,37 @@ fetch(requestUrl)
 
     console.log(artist);  
       
-     // var thumbEl = document.createElement('img');
-     // var artistEl = document.createElement('h2');
-     // var genreEl = document.createElement('p');
-     // var bioEl = document.createElement('p');
-     // var topRadioEl = document.createElement('a');
-//
-     //// thumbEl.textContent(thumb);
-     // artistEl.textContent(artist);
-     // genreEl.textContent(genre);
-     // bioEl.textContent(bio);
-     // topRadioEl.textContent(topRadio);
-//
-     // //artistThumbEl.appendChild(thumbEl);
-     // artistThumbEl.appendChild(artistEl);
-//
-//
-     //
-//
-     // 
-     // 
-//
-//
-     // 
-     // console.log(topRadio);
+     var thumbEl = document.createElement('img');
+     var artistEl = document.createElement('h2');
+     var genreEl = document.createElement('p');
+     var bioEl = document.createElement('p');
+     var topRadioEl = document.createElement('a');
+
+     thumbEl.src = thumb;
+     artistEl.textContent = artist;
+     genreEl.textContent = 'Genre: ' + genre;
+     genreEl.className = 'fs-3'
+     bioEl.textContent = bio;
+     topRadioEl.textContent = 'Top Radio Plays'
+     topRadioEl.href = topRadio;
+     thumbEl.className = 'img-fluid'
+
+     artistThumbEl.appendChild(thumbEl);
+     artistThumbEl.appendChild(artistEl);
+    bioGenreEl.appendChild(genreEl);
+    bioGenreEl.appendChild(bioEl);
+    bioGenreEl.appendChild(topRadioEl);
+    
+
+
+     
+
+     
+     
+
+
+     
+     console.log(topRadio);
     })
    
    
