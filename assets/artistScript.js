@@ -1,12 +1,17 @@
 
-//Getting articles from NY Times API
-var search = 'coldplay'
-var apiKey = 'Elez3rrH7G5nh44GoCJVBGcWaSKZnwYX'
-var requestUrl = `https:api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&sort=newest&api-key=${apiKey}`
-var newsEl = document.querySelector('#news');
+var artistName = new URL(location.href).searchParams.get('artist');
 var artistThumbEl = document.querySelector('#artist-thumbnail');
 var bioGenreEl = document.querySelector('#bio-genre');
+var newsEl = document.querySelector('#news');
+var artistSearchBtn = document.getElementById('artist-search-btn')
+var favoritesBtn = document.getElementById("add-to-favorites")
 
+
+function nyTimesApi(){
+ var apiKey = 'Elez3rrH7G5nh44GoCJVBGcWaSKZnwYX'
+var requestUrl = `https:api.nytimes.com/svc/search/v2/articlesearch.json?q=${artistName}&sort=newest&api-key=${apiKey}`
+
+console.log(artistName, requestUrl)
 
 fetch(requestUrl)
   .then(function (response) {
@@ -14,6 +19,7 @@ fetch(requestUrl)
   })
   .then(function (data) {
     console.log(data);
+    newsEl.innerHTML = ""
     var betterData = data.response.docs
     for (let i = 0; i < 4; i++) {
       var formattedDate = betterData[i].pub_date.split("T")
@@ -35,17 +41,21 @@ fetch(requestUrl)
       newsEl.appendChild(article)
     }
   });
-
+}
 //Getting data from Audio DB
-var artistName = new URL(location.href).searchParams.get('artist');
-var musicUrl = `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${artistName}`
-var apiKey2 = '2'
+function audioDbApi(){
+var musicUrl = `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${artistName}`;
+// var apiKey2 = '2';
+
+console.log(artistName, musicUrl)
 
 fetch(musicUrl)
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
+    bioGenreEl.innerHTML = ""
+    artistThumbEl.innerHTML = ""
     console.log(data);
     var thumb = data.artists[0].strArtistThumb;
     var artist = data.artists[0].strArtist;
@@ -53,7 +63,7 @@ fetch(musicUrl)
     var bio = data.artists[0].strBiographyEN;
     var topRadio = data.artists[0].strLastFMChart;
 
-    console.log(artist);
+    console.log(topRadio);
 
     var thumbEl = document.createElement('img');
     var artistEl = document.createElement('h2');
@@ -77,5 +87,29 @@ fetch(musicUrl)
     bioGenreEl.appendChild(topRadioEl);
 
   });
+}
+function setFavoritesBtn(){
+  favoritesBtn.dateset.artist= artistName
 
+}
 
+function getNewArtist(e){
+  e.preventDefault()
+  artistName = document.getElementById("search-input").value; 
+  console.log(artistName)
+  nyTimesApi()
+audioDbApi()
+setFavoritesBtn()
+}
+function setFavoriteArtists(){
+var artistArray= JSON.parse(localStorage.getItem('artist')) || []
+var artistToSave = favoritesBtn.dataset.artist
+artistArray.push(artistToSave)
+localStorage.setItem('artist', JSON.stringify(artistArray))
+}
+
+setFavoritesBtn()
+nyTimesApi()
+audioDbApi()
+artistSearchBtn.addEventListener('click', getNewArtist)
+favoritesBtn.addEventListener('click', setFavoriteArtists)

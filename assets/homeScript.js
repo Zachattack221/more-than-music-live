@@ -117,4 +117,4 @@ var handleSearch = function(event){
 
    searchBtn.addEventListener('click', handleSearch)
    
-    
+   //var artistArray= JSON.parse(localStorage.getItem('artist')) || [] 
