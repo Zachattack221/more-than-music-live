@@ -1,6 +1,5 @@
-// var outkastEl = document.querySelector('#outkast');
-// var coldplayEl = document.querySelector('#coldplay');
-// var taylorSwiftEl = document.querySelector('#taylor-swift');
+var searchBtn = document.querySelector('#search');
+
 
 fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=outkast')
     .then(function (response) {
@@ -32,7 +31,7 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=outkast')
         popularSearchesEl.appendChild(aEl);
 
     });
-// popularSearchOne.appendChild(thumbEl);
+
 
 
 
@@ -97,3 +96,25 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=coldplay')
         popularSearchesEl.appendChild(aEl);
 
     });
+   var saveToLocalStorage = function(value){
+    var history = JSON.parse(localStorage.getItem("history")) || [];
+    history.push(value);
+    var data = JSON.stringify(history);
+    localStorage.setItem('history', data);
+   }
+
+var redirectToArtistPage = function(artist){
+window.location.assign(`./artist.html?artist=${artist}`);
+}
+
+var handleSearch = function(event){
+    event.preventDefault();
+    var inputValue = document.querySelector('#search-input').value;
+    saveToLocalStorage(inputValue);
+    redirectToArtistPage(inputValue);
+}
+
+
+   searchBtn.addEventListener('click', handleSearch)
+   
+    
