@@ -4,6 +4,8 @@ var search = 'coldplay'
 var apiKey= 'Elez3rrH7G5nh44GoCJVBGcWaSKZnwYX'
 var requestUrl = `https:api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&sort=newest&api-key=${apiKey}`
 var newsEl= document.querySelector('#news');
+var artistThumbEl= document.querySelector('#artist-thumbnail');
+
 fetch(requestUrl)
     .then(function (response) {
       return response.json();
@@ -52,18 +54,33 @@ fetch(requestUrl)
       var genre = data.artists[0].strGenre;
       var bio = data.artists[0].strBiographyEN;
       var topRadio = data.artists[0].strLastFMChart;
-      
-      thumb = document.createElement('figure');
-      artist = document.createElement('fig caption');
-      genre = document.createElement('p');
-      bio = document.createElement('p');
-      topRadio = document.createElement('a');
 
+    console.log(artist);  
       
-
-
-      
-      console.log(topRadio);
+     // var thumbEl = document.createElement('img');
+     // var artistEl = document.createElement('h2');
+     // var genreEl = document.createElement('p');
+     // var bioEl = document.createElement('p');
+     // var topRadioEl = document.createElement('a');
+//
+     //// thumbEl.textContent(thumb);
+     // artistEl.textContent(artist);
+     // genreEl.textContent(genre);
+     // bioEl.textContent(bio);
+     // topRadioEl.textContent(topRadio);
+//
+     // //artistThumbEl.appendChild(thumbEl);
+     // artistThumbEl.appendChild(artistEl);
+//
+//
+     //
+//
+     // 
+     // 
+//
+//
+     // 
+     // console.log(topRadio);
     })
    
    
