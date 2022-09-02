@@ -86,20 +86,6 @@ function audioDbApi() {
 
     });
 }
-// function setFavoritesBtn(){
-//   favoritesBtn.dateset.artist= artistName;
-// }
-
-
-
-// function getNewArtist(e) {
-//   e.preventDefault()
-//   artistName = document.getElementById("search-input").value;
-//   console.log(artistName)
-//   nyTimesApi()
-//   audioDbApi()
-//   // setFavoritesBtn()
-// }
 
 function setFavoriteArtists() {
   var artistArray = JSON.parse(localStorage.getItem('artist')) || []
@@ -108,6 +94,7 @@ function setFavoriteArtists() {
   var uniqueArtists = Array.from(new Set(artistArray));
   var data = JSON.stringify(uniqueArtists);
   localStorage.setItem('artist', data);
+  validateFavorites();
 };
 
 var saveToLocalStorage = function (value) {
@@ -129,8 +116,19 @@ var handleSearch = function (event) {
   redirectToArtistPage(inputValue);
 }
 
+var validateFavorites = function () {
+  var artistArray = JSON.parse(localStorage.getItem('artist')) || [];
+  for(var i = 0; i < artistArray.length; i++) {
+    if(artistArray[i].artistName.toLowerCase() === artistName.toLowerCase()) {
+      favoritesBtn.classList.remove('btn-warning');
+      favoritesBtn.classList.add('btn-success');
+      favoritesBtn.textContent = 'Added to Favorites';
+    }
+  }
+}
+
 searchBtn.addEventListener('click', handleSearch);
 favoritesBtn.addEventListener('click', setFavoriteArtists);
-
+// validateFavorites();
 nyTimesApi();
 audioDbApi();

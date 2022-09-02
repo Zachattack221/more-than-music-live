@@ -116,17 +116,16 @@ var handleSearch = function (event) {
     redirectToArtistPage(inputValue);
 }
 
-searchBtn.addEventListener('click', handleSearch)
 
 var fillFavorites = function() {
     var artistArray = JSON.parse(localStorage.getItem('artist')) || [];
-    console.log(artistArray);
-    for(var i = 0; i < artistArray.length; i++) {
+    var uniqueArtists= Array.from(new Set(artistArray));
+    for(var i = 0; i < uniqueArtists.length; i++) {
         var favLinkEl = document.createElement('a');
         var favImageEl = document.createElement('img');
         var favTitleEl = document.createElement('p');
         var favDivEl = document.createElement('div')
-
+        
         favImageEl.src = artistArray[i].artistImg;
         favImageEl.className = 'img-fluid';
         favTitleEl.textContent = artistArray[i].artistName;
@@ -134,7 +133,7 @@ var fillFavorites = function() {
         
         favLinkEl.className = 'col-sm-12 col-md-12 col-lg-4'
         favLinkEl.href = `./artist.html?artist=${artistArray[i].artistName}`;
-
+        
         favDivEl.appendChild(favImageEl);
         favDivEl.appendChild(favTitleEl);
         favLinkEl.appendChild(favDivEl);
@@ -142,8 +141,5 @@ var fillFavorites = function() {
     }
 }
 
+searchBtn.addEventListener('click', handleSearch);
 fillFavorites();
-// var artistArray = JSON.parse(localStorage.getItem('artist'));
-// console.log(artistArray);
-// storedFavorites.appendChild(artistArray.artistImg);
-   //var artistArray= JSON.parse(localStorage.getItem('artist')) || [] 
