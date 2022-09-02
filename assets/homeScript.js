@@ -56,8 +56,8 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=coldplay')
         coldplayImageEl.className = 'img-fluid';
         coldplayTitleEl.textContent = artist;
         coldplayTitleEl.className = 'fs-3 text-center';
+        
         aEl.className = 'col-4'
-
         aEl.href = `./artist.html?artist=${artist}`;
 
         coldplayDivEl.appendChild(coldplayImageEl);
@@ -87,16 +87,16 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=Rihanna')
         RihannaImageEl.className = 'img-fluid';
         RihannaTitleEl.textContent = artist;
         RihannaTitleEl.className = 'fs-3 text-center';
+        
         aEl.className = 'col-4'
-
         aEl.href = `./artist.html?artist=${artist}`;
 
         RihannaDivEl.appendChild(RihannaImageEl);
         RihannaDivEl.appendChild(RihannaTitleEl);
         aEl.appendChild(RihannaDivEl);
         popularSearchesEl.appendChild(aEl);
-
     });
+
 var saveToLocalStorage = function (value) {
     var history = JSON.parse(localStorage.getItem("history")) || [];
     history.push(value);

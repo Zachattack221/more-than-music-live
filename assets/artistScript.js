@@ -1,3 +1,4 @@
+var searchBtn = document.querySelector('#artist-search-btn');
 
 var artistName = new URL(location.href).searchParams.get('artist');
 var artistThumbEl = document.querySelector('#artist-thumbnail');
@@ -89,6 +90,8 @@ function audioDbApi() {
 //   favoritesBtn.dateset.artist= artistName;
 // }
 
+
+
 // function getNewArtist(e) {
 //   e.preventDefault()
 //   artistName = document.getElementById("search-input").value;
@@ -96,15 +99,38 @@ function audioDbApi() {
 //   nyTimesApi()
 //   audioDbApi()
 //   // setFavoritesBtn()
-// };
+// }
 
 function setFavoriteArtists() {
   var artistArray = JSON.parse(localStorage.getItem('artist')) || []
-  var artistToSave = favoritesBtn.dataset.artist;
-  artistArray.push(artistToSave)
-  var data = JSON.stringify(artistArray);
+  var artistToSave = {'artistName': artistName, 'artistImg':artistThumbEl.firstChild.src};
+  artistArray.push(artistToSave);
+  var uniqueArtists = Array.from(new Set(artistArray));
+  var data = JSON.stringify(uniqueArtists);
   localStorage.setItem('artist', data);
 };
+
+var saveToLocalStorage = function (value) {
+  var history = JSON.parse(localStorage.getItem("history")) || [];
+  history.push(value);
+  var historySet = Array.from(new Set(history));
+  var data = JSON.stringify(historySet);
+  localStorage.setItem('history', data);
+}
+
+var redirectToArtistPage = function (artist) {
+  window.location.assign(`./artist.html?artist=${artist}`);
+}
+
+var handleSearch = function (event) {
+  event.preventDefault();
+  var inputValue = document.querySelector('#search-input').value;
+  saveToLocalStorage(inputValue);
+  redirectToArtistPage(inputValue);
+}
+
+searchBtn.addEventListener('click', handleSearch);
+favoritesBtn.addEventListener('click', setFavoriteArtists);
 
 nyTimesApi();
 audioDbApi();
