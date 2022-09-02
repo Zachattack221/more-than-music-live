@@ -1,4 +1,5 @@
 var searchBtn = document.querySelector('#search');
+var storedFavorites = document.querySelector('#favoriteArtists');
 
 
 fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=outkast')
@@ -15,15 +16,16 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=outkast')
         var aEl = document.createElement('a');
         var outkastImageEl = document.createElement('img');
         var outkastTitleEl = document.createElement('p');
-        var outkastDivEl = document.createElement('div')
+        var outkastDivEl = document.createElement('div');
 
         outkastImageEl.src = thumb;
         outkastImageEl.className = 'img-fluid';
         outkastTitleEl.textContent = artist;
         outkastTitleEl.className = 'fs-3 text-center';
-        outkastDivEl.className = 'col-4';
+
 
         aEl.href = `./artist.html?artist=${artist}`;
+        aEl.className = 'col-sm-12 col-md-12 col-lg-4';
 
         outkastDivEl.appendChild(outkastImageEl);
         outkastDivEl.appendChild(outkastTitleEl);
@@ -55,8 +57,8 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=coldplay')
         coldplayImageEl.className = 'img-fluid';
         coldplayTitleEl.textContent = artist;
         coldplayTitleEl.className = 'fs-3 text-center';
-        coldplayDivEl.className = 'col-4';
-
+        
+        aEl.className = 'col-sm-12 col-md-12 col-lg-4'
         aEl.href = `./artist.html?artist=${artist}`;
 
         coldplayDivEl.appendChild(coldplayImageEl);
@@ -66,7 +68,7 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=coldplay')
 
     });
 
-    fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=Rihanna')
+fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=Rihanna')
     .then(function (response) {
         return response.json();
     })
@@ -86,28 +88,28 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=coldplay')
         RihannaImageEl.className = 'img-fluid';
         RihannaTitleEl.textContent = artist;
         RihannaTitleEl.className = 'fs-3 text-center';
-        RihannaDivEl.className = 'col-4';
-
+        
+        aEl.className = 'col-sm-12 col-md-12 col-lg-4'
         aEl.href = `./artist.html?artist=${artist}`;
 
         RihannaDivEl.appendChild(RihannaImageEl);
         RihannaDivEl.appendChild(RihannaTitleEl);
         aEl.appendChild(RihannaDivEl);
         popularSearchesEl.appendChild(aEl);
-
     });
-   var saveToLocalStorage = function(value){
+
+var saveToLocalStorage = function (value) {
     var history = JSON.parse(localStorage.getItem("history")) || [];
     history.push(value);
     var data = JSON.stringify(history);
     localStorage.setItem('history', data);
-   }
-
-var redirectToArtistPage = function(artist){
-window.location.assign(`./artist.html?artist=${artist}`);
 }
 
-var handleSearch = function(event){
+var redirectToArtistPage = function (artist) {
+    window.location.assign(`./artist.html?artist=${artist}`);
+}
+
+var handleSearch = function (event) {
     event.preventDefault();
     var inputValue = document.querySelector('#search-input').value;
     saveToLocalStorage(inputValue);
@@ -115,6 +117,29 @@ var handleSearch = function(event){
 }
 
 
-   searchBtn.addEventListener('click', handleSearch)
-   
-   //var artistArray= JSON.parse(localStorage.getItem('artist')) || [] 
+var fillFavorites = function() {
+    var artistArray = JSON.parse(localStorage.getItem('artist')) || [];
+    var uniqueArtists= Array.from(new Set(artistArray));
+    for(var i = 0; i < uniqueArtists.length; i++) {
+        var favLinkEl = document.createElement('a');
+        var favImageEl = document.createElement('img');
+        var favTitleEl = document.createElement('p');
+        var favDivEl = document.createElement('div')
+        
+        favImageEl.src = artistArray[i].artistImg;
+        favImageEl.className = 'img-fluid';
+        favTitleEl.textContent = artistArray[i].artistName;
+        favTitleEl.className = 'fs-3 text-center';
+        
+        favLinkEl.className = 'col-sm-12 col-md-12 col-lg-4'
+        favLinkEl.href = `./artist.html?artist=${artistArray[i].artistName}`;
+        
+        favDivEl.appendChild(favImageEl);
+        favDivEl.appendChild(favTitleEl);
+        favLinkEl.appendChild(favDivEl);
+        storedFavorites.appendChild(favLinkEl);
+    }
+}
+
+searchBtn.addEventListener('click', handleSearch);
+fillFavorites();
