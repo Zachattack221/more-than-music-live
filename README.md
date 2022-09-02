@@ -8,7 +8,7 @@
 
 ## Description
 [link to live site](https://dstelzl.github.io/more-than-music/)
-Music fan application designed to retrieve and store images, biographical information, and current news about specific artists. This application allows the user to search and save favorites.
+Music fan application designed to retrieve and store images, biographical information, and current news about specific artists. This application allows the user to search and save favorites. The data for this project is dynamically pulled from theaudioDB API and The New York Times article search API.
 
 
 
@@ -20,8 +20,7 @@ Music fan application designed to retrieve and store images, biographical inform
 
 
 ## Usage
-Top artists dynamically displayed on home page with saved favorites displayed below. Search bar at the top of home and artist page
-
+Top artists dynamically displayed on home page with saved favorites displayed below. Search bar at the top of home and artist page. User can type an artist name into the search input field, and click submit. On submit, user is redirected to a results page that loads API information dynamically on page. If user chooses to add to favorites, they do so by clicking 'Add to Favorites' button. Favorites section on home page is populated from local storage to display user selected favorites.
 
 
 ## Contributors
