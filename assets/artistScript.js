@@ -7,109 +7,104 @@ var artistSearchBtn = document.getElementById('artist-search-btn')
 var favoritesBtn = document.getElementById("add-to-favorites")
 
 
-function nyTimesApi(){
- var apiKey = 'Elez3rrH7G5nh44GoCJVBGcWaSKZnwYX'
-var requestUrl = `https:api.nytimes.com/svc/search/v2/articlesearch.json?q=${artistName}&sort=newest&api-key=${apiKey}`
+function nyTimesApi() {
+  var apiKey = 'Elez3rrH7G5nh44GoCJVBGcWaSKZnwYX'
+  var requestUrl = `https:api.nytimes.com/svc/search/v2/articlesearch.json?q=${artistName}&sort=newest&api-key=${apiKey}`
 
-console.log(artistName, requestUrl)
+  console.log(artistName, requestUrl)
 
-fetch(requestUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-    newsEl.innerHTML = ""
-    var betterData = data.response.docs
-    for (let i = 0; i < 4; i++) {
-      var formattedDate = betterData[i].pub_date.split("T")
-      console.log(formattedDate)
-      var article = document.createElement('div')
-      var date = document.createElement('h4')
-      date.textContent = formattedDate[0]
-      article.appendChild(date)
-      var link = document.createElement('a')
-      link.setAttribute("href", betterData[i].web_url)
-      var header = document.createElement('h3')
-      header.textContent = (betterData[i].headline.main)
-      link.appendChild(header)
-      article.appendChild(link)
-      var snippet = document.createElement('h5')
-      snippet.textContent = (betterData[i].snippet)
-      article.appendChild(snippet)
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      newsEl.innerHTML = ""
+      var betterData = data.response.docs
+      for (let i = 0; i < 4; i++) {
+        var formattedDate = betterData[i].pub_date.split("T")
+        console.log(formattedDate)
+        var article = document.createElement('div')
+        var date = document.createElement('h4')
+        date.textContent = formattedDate[0]
+        article.appendChild(date)
+        var link = document.createElement('a')
+        link.setAttribute("href", betterData[i].web_url)
+        var header = document.createElement('h3')
+        header.textContent = (betterData[i].headline.main)
+        link.appendChild(header)
+        article.appendChild(link)
+        var snippet = document.createElement('h5')
+        snippet.textContent = (betterData[i].snippet)
+        article.appendChild(snippet)
 
-      newsEl.appendChild(article)
-    }
-  });
+        newsEl.appendChild(article)
+      }
+    });
 }
 //Getting data from Audio DB
-function audioDbApi(){
-var musicUrl = `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${artistName}`;
-// var apiKey2 = '2';
+function audioDbApi() {
+  var musicUrl = `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${artistName}`;
+  // var apiKey2 = '2';
 
-console.log(artistName, musicUrl)
 
-fetch(musicUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    bioGenreEl.innerHTML = ""
-    artistThumbEl.innerHTML = ""
-    console.log(data);
-    var thumb = data.artists[0].strArtistThumb;
-    var artist = data.artists[0].strArtist;
-    var genre = data.artists[0].strGenre;
-    var bio = data.artists[0].strBiographyEN;
-    var topRadio = data.artists[0].strLastFMChart;
+  fetch(musicUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      bioGenreEl.innerHTML = ""
+      artistThumbEl.innerHTML = ""
 
-    console.log(topRadio);
+      var thumb = data.artists[0].strArtistThumb;
+      var artist = data.artists[0].strArtist;
+      var genre = data.artists[0].strGenre;
+      var bio = data.artists[0].strBiographyEN;
+      var topRadio = data.artists[0].strLastFMChart;
 
-    var thumbEl = document.createElement('img');
-    var artistEl = document.createElement('h2');
-    var genreEl = document.createElement('p');
-    var bioEl = document.createElement('p');
-    var topRadioEl = document.createElement('a');
-  
-    thumbEl.src = thumb;
-    artistEl.textContent = artist;
-    genreEl.textContent = 'Genre: ' + genre;
-    genreEl.className = 'fs-3'
-    bioEl.textContent = bio;
-    topRadioEl.textContent = 'Top Radio Plays';
-    topRadioEl.href = topRadio;
-    thumbEl.className = 'img-fluid';
-    
-    artistThumbEl.appendChild(thumbEl);
-    artistThumbEl.appendChild(artistEl);
-    bioGenreEl.appendChild(genreEl);
-    bioGenreEl.appendChild(bioEl);
-    bioGenreEl.appendChild(topRadioEl);
+      var thumbEl = document.createElement('img');
+      var artistEl = document.createElement('h2');
+      var genreEl = document.createElement('p');
+      var bioEl = document.createElement('p');
+      var topRadioEl = document.createElement('a');
 
-  });
+      thumbEl.src = thumb;
+      artistEl.textContent = artist;
+      genreEl.textContent = 'Genre: ' + genre;
+      genreEl.className = 'fs-3'
+      bioEl.textContent = bio;
+      topRadioEl.textContent = 'Top Radio Plays';
+      topRadioEl.href = topRadio;
+      thumbEl.className = 'img-fluid';
+
+      artistThumbEl.appendChild(thumbEl);
+      artistThumbEl.appendChild(artistEl);
+      bioGenreEl.appendChild(genreEl);
+      bioGenreEl.appendChild(bioEl);
+      bioGenreEl.appendChild(topRadioEl);
+
+    });
 }
-function setFavoritesBtn(){
-  favoritesBtn.dateset.artist= artistName
+// function setFavoritesBtn(){
+//   favoritesBtn.dateset.artist= artistName;
+// }
 
-}
+// function getNewArtist(e) {
+//   e.preventDefault()
+//   artistName = document.getElementById("search-input").value;
+//   console.log(artistName)
+//   nyTimesApi()
+//   audioDbApi()
+//   // setFavoritesBtn()
+// };
 
-function getNewArtist(e){
-  e.preventDefault()
-  artistName = document.getElementById("search-input").value; 
-  console.log(artistName)
-  nyTimesApi()
-audioDbApi()
-setFavoritesBtn()
-}
-function setFavoriteArtists(){
-var artistArray= JSON.parse(localStorage.getItem('artist')) || []
-var artistToSave = favoritesBtn.dataset.artist
-artistArray.push(artistToSave)
-localStorage.setItem('artist', JSON.stringify(artistArray))
-}
+function setFavoriteArtists() {
+  var artistArray = JSON.parse(localStorage.getItem('artist')) || []
+  var artistToSave = favoritesBtn.dataset.artist;
+  artistArray.push(artistToSave)
+  var data = JSON.stringify(artistArray);
+  localStorage.setItem('artist', data);
+};
 
-setFavoritesBtn()
-nyTimesApi()
-audioDbApi()
-artistSearchBtn.addEventListener('click', getNewArtist)
-favoritesBtn.addEventListener('click', setFavoriteArtists)
+nyTimesApi();
+audioDbApi();
