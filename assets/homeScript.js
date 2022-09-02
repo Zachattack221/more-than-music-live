@@ -1,4 +1,5 @@
 var searchBtn = document.querySelector('#search');
+var storedFavorites = document.querySelector('#favoriteArtists');
 
 
 fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=outkast')
@@ -15,7 +16,7 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=outkast')
         var aEl = document.createElement('a');
         var outkastImageEl = document.createElement('img');
         var outkastTitleEl = document.createElement('p');
-        var outkastDivEl = document.createElement('div')
+        var outkastDivEl = document.createElement('div');
 
         outkastImageEl.src = thumb;
         outkastImageEl.className = 'img-fluid';
@@ -24,7 +25,7 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=outkast')
 
 
         aEl.href = `./artist.html?artist=${artist}`;
-        aEl.className = 'col-4'
+        aEl.className = 'col-sm-12 col-md-12 col-lg-4';
 
         outkastDivEl.appendChild(outkastImageEl);
         outkastDivEl.appendChild(outkastTitleEl);
@@ -57,7 +58,7 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=coldplay')
         coldplayTitleEl.textContent = artist;
         coldplayTitleEl.className = 'fs-3 text-center';
         
-        aEl.className = 'col-4'
+        aEl.className = 'col-sm-12 col-md-12 col-lg-4'
         aEl.href = `./artist.html?artist=${artist}`;
 
         coldplayDivEl.appendChild(coldplayImageEl);
@@ -88,7 +89,7 @@ fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=Rihanna')
         RihannaTitleEl.textContent = artist;
         RihannaTitleEl.className = 'fs-3 text-center';
         
-        aEl.className = 'col-4'
+        aEl.className = 'col-sm-12 col-md-12 col-lg-4'
         aEl.href = `./artist.html?artist=${artist}`;
 
         RihannaDivEl.appendChild(RihannaImageEl);
@@ -115,7 +116,34 @@ var handleSearch = function (event) {
     redirectToArtistPage(inputValue);
 }
 
-
 searchBtn.addEventListener('click', handleSearch)
 
+var fillFavorites = function() {
+    var artistArray = JSON.parse(localStorage.getItem('artist')) || [];
+    console.log(artistArray);
+    for(var i = 0; i < artistArray.length; i++) {
+        var favLinkEl = document.createElement('a');
+        var favImageEl = document.createElement('img');
+        var favTitleEl = document.createElement('p');
+        var favDivEl = document.createElement('div')
+
+        favImageEl.src = artistArray[i].artistImg;
+        favImageEl.className = 'img-fluid';
+        favTitleEl.textContent = artistArray[i].artistName;
+        favTitleEl.className = 'fs-3 text-center';
+        
+        favLinkEl.className = 'col-sm-12 col-md-12 col-lg-4'
+        favLinkEl.href = `./artist.html?artist=${artistArray[i].artistName}`;
+
+        favDivEl.appendChild(favImageEl);
+        favDivEl.appendChild(favTitleEl);
+        favLinkEl.appendChild(favDivEl);
+        storedFavorites.appendChild(favLinkEl);
+    }
+}
+
+fillFavorites();
+// var artistArray = JSON.parse(localStorage.getItem('artist'));
+// console.log(artistArray);
+// storedFavorites.appendChild(artistArray.artistImg);
    //var artistArray= JSON.parse(localStorage.getItem('artist')) || [] 
