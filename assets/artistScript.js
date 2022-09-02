@@ -10,7 +10,7 @@ var favoritesBtn = document.getElementById("add-to-favorites")
 
 function nyTimesApi() {
   var apiKey = 'Elez3rrH7G5nh44GoCJVBGcWaSKZnwYX'
-  var requestUrl = `https:api.nytimes.com/svc/search/v2/articlesearch.json?q=${artistName}&sort=newest&api-key=${apiKey}`
+  var requestUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${artistName}&sort=newest&api-key=${apiKey}`
 
   console.log(artistName, requestUrl)
 
