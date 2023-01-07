@@ -44,6 +44,7 @@ function nyTimesApi() {
     });
 }
 //Getting data from Audio DB
+// TODO: Test audio DB api key, possibly expired
 function audioDbApi() {
   var musicUrl = `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${artistName}`;
   // var apiKey2 = '2';

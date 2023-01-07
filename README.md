@@ -7,10 +7,9 @@
 4. [Contributors](#contributors)
 
 ## Description
+<!-- TODO: Re-host on heroku -->
 [link to live site](https://dstelzl.github.io/more-than-music/)
-Music fan application designed to retrieve and store images, biographical information, and current news about specific artists. This application allows the user to search and save favorites. The data for this project is dynamically pulled from theaudioDB API and The New York Times article search API.
-
-
+Music fan application designed to retrieve and store images, biographical information, and current news about specific artists. This application allows the user to search and save favorites. The data for this project is dynamically pulled from theaudioDB API and The New York Times article search API. 
 
 
 ## Visuals
