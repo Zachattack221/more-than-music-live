@@ -23,6 +23,6 @@ Top artists dynamically displayed on home page with saved favorites displayed be
 
 
 ## Contributors
-Zach van Dijk
-Heather Cruz
-Deborah Stelzl
+<a href="https://github.com/Zachattack221">Zach van Dijk</a> \
+<a href="https://github.com/hcruz77"> Heather Cruz</a> \
+<a href="https://github.com/dstelzl">Deborah Stelzl</a> 
